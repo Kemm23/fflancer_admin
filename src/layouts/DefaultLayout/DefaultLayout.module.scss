@@ -1,0 +1,72 @@
+$heightHeader: 6.4rem;
+$widthSider: 25rem;
+
+.container {
+    min-height: calc(100vh - $heightHeader);
+    display: flex;
+    flex-direction: row;
+    .sider {
+        min-width: $widthSider !important;
+    }
+
+    .menu{
+        height: 100%;
+        width: 100%;
+    }
+    
+    .menuTitle {
+        color: black !important;
+        font-weight: 700;
+        margin-top: 1rem;
+    }
+
+    .content {
+        flex-grow: 1;
+        display: flex;
+    }
+
+    .content > div:nth-child(1) {
+        flex-grow: 1;
+    }
+}
+
+.Header {
+    height: $heightHeader;
+    background-color: #346cb0;
+    img {
+        width: 2.8rem;
+        margin: 0 6px;
+    }
+    .navTitle {
+        > div:first-child {
+            font-weight: 600;
+            color: #f7c46c;
+        }
+        > div:last-child {
+            color: hsla(0,0%,100%,.7)
+        }
+    }
+    .divider {
+        border-left: 1px solid black;
+        height: $heightHeader;
+        margin: 0 1.2rem;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+        font-size: 2rem;
+        color: white;
+        font-weight: 500;
+        margin-left: 1.4rem;
+    }
+    .avatar {
+        transform: translateY(18%);
+        margin-right: 1.4rem;
+    }
+    .userInfo {
+        color: white;
+    }
+}
+
+
+

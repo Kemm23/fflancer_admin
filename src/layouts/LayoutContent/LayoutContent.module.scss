@@ -1,0 +1,44 @@
+$widthContainer: calc(100vw - 25rem);
+
+.container {
+    padding: 2.4rem 2.4rem 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: $widthContainer;
+    .header {
+        margin-bottom: 3rem;
+        >div{
+            display: flex;
+            justify-content: space-between;
+            >h3 {
+                font-size: 2.4rem;
+            }
+            .btnCreate {
+                font-weight: 500;
+            }
+        }
+    }
+    .wrapper {
+        background: white;
+        flex-grow: 1;
+        max-width: 100%;
+        overflow-x: scroll;
+        > div { 
+            padding: 2.4rem;
+            .search {
+                display: flex;
+                justify-content: space-evenly;
+                max-width: 40rem;
+                > .btnSearch {
+                    font-weight: 500;
+                    margin-left: 2.4rem;
+                }
+            }
+        }
+    }
+    .footer{
+        text-align: center;
+    }
+}
+
