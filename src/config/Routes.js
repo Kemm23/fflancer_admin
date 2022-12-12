@@ -5,7 +5,8 @@ const routes = {
     freelancer: '/freelancer',
     job: '/job',
     transaction: '/transaction',
-    report: '/report'
+    report: '/report',
+    financial: '/report/financial'
     // login: '/login'
 };
 

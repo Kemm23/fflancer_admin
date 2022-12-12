@@ -35,9 +35,11 @@ function User() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   useEffect(() => {
     dispatch(getAccounts({ type: 1, cur: 1, page: 5 }));
   }, []);
+
   useEffect(() => {
     if (info) {
       form.setFieldsValue({
@@ -123,6 +125,7 @@ function User() {
         bordered
         size="middle"
         pagination={{
+          showSizeChanger: false,
           pageSize: 5,
           total: totalPage * 5,
           onChange(page) {

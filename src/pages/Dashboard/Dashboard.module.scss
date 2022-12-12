@@ -1,0 +1,53 @@
+.container {
+    padding: 2.4rem 2.4rem 0;
+    height: 100%;
+    h1 {
+        font-size: 2rem;
+    }
+    .subTitle {
+        color: #9b9b9b;
+        font-size: 16px;
+    }
+    .wrapperOverview {
+        margin-top: 1.6rem;
+        background-color: white;
+        padding: 2rem;
+        height: 100%;
+        max-width: 99%;
+        width: 100%;
+        > h4 {
+            margin: 2rem 0;
+        }
+        .listItem {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .titleItem {
+            font-weight: bold;
+            font-size: 1.6rem;
+            display: flex;
+            justify-content: space-between;
+            a {
+                font-size: 1.2rem;
+            }
+        }
+        .subTitleItem {
+            color: #9b9b9b;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .iconProgress1 {
+            background: #1677ff;
+            width: 1rem;
+            height: 1rem;
+            display: inline-block;
+        }
+        .iconProgress2{
+            @extend .iconProgress1;
+            background: #ffc107;
+        }
+        .chart {
+            margin-top: 3rem;
+        }
+    }
+}

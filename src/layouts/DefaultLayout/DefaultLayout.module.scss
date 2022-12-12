@@ -3,36 +3,55 @@ $widthSider: 25rem;
 
 .container {
     min-height: calc(100vh - $heightHeader);
+    margin-top: 6.4rem;
     display: flex;
-    flex-direction: row;
-    .sider {
-        min-width: $widthSider !important;
-    }
 
-    .menu{
-        height: 100%;
-        width: 100%;
+    .sider {
+        overflow: auto;
+        height: calc(100vh - $heightHeader);
+        position: sticky;
+        top: $heightHeader;
+        left: 0;
+        z-index: 999;
+        .menu{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .menuTitle {
+            color: black !important;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .trigger{
+            transform: translateY(-100%);
+            width: 100%;
+            background-color: #E6F7FF;
+            font-size: 25px;
+            display: block;
+            padding: 5px;
+            }
     }
     
-    .menuTitle {
-        color: black !important;
-        font-weight: 700;
-        margin-top: 1rem;
-    }
-
     .content {
-        flex-grow: 1;
         display: flex;
+        > div:nth-child(1) {
+            flex-grow: 1;
+        }
     }
 
-    .content > div:nth-child(1) {
-        flex-grow: 1;
+    .footer{
+        text-align: center;
     }
 }
 
 .Header {
     height: $heightHeader;
     background-color: #346cb0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 999;
     img {
         width: 2.8rem;
         margin: 0 6px;
@@ -67,6 +86,7 @@ $widthSider: 25rem;
         color: white;
     }
 }
+
 
 
 

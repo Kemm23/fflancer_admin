@@ -5,12 +5,10 @@ import {
     HomeOutlined,
     PlusOutlined,
 } from "@ant-design/icons";
-import { DefaultLayout } from "~/layouts";
 import { Footer } from "antd/es/layout/layout";
 
 function WithoutSearch({ children, ...props }) {
-  return <DefaultLayout>
-    <div className={clsx(styles.container)}>
+  return (<div className={clsx(styles.container)}>
       <div className={clsx(styles.header)}>
         <Breadcrumb>
           <Breadcrumb.Item href="/dashboard">
@@ -29,9 +27,9 @@ function WithoutSearch({ children, ...props }) {
           {children}
         </div>
       </div>
-      <Footer className={clsx(styles.footer)}>Copyright © 2022. All right reserved.</Footer>
-    </div>
-  </DefaultLayout>;
+    </div>)
+    
+
 }
 
 export default WithoutSearch;

@@ -78,6 +78,7 @@ function Transaction() {
         bordered
         size="middle"
         pagination={{
+          showSizeChanger: false,
           pageSize: pageS,
           total: totalPage*pageS,
           onChange(page) {

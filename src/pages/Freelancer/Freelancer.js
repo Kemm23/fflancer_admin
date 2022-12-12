@@ -10,6 +10,7 @@ function Freelancer() {
   const freelancers = useSelector((state) => state.adminReducer.freelancers.list);
   const totalPage = useSelector((state) => state.adminReducer.freelancers.totalPage);
   const isLoading = useSelector((state) => state.adminReducer.isLoading);
+
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState(false)
   const [info, setInfo] = useState()
@@ -123,6 +124,7 @@ function Freelancer() {
         bordered
         size="small"
         pagination={{
+          showSizeChanger: false,
           pageSize: pageSize,
           total: totalPage*pageSize,
           onChange(page) {

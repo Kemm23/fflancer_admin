@@ -10,18 +10,22 @@ function Job() {
   const totalPage = useSelector((state) => state.adminReducer.jobs.totalPage);
   const isLoading = useSelector((state) => state.adminReducer.isLoading);
   const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState()
+
   const handleShowDrawer = (data) => {
     setInfo(data)
     setOpen(true);
   };
+
   const onClose = () => {
     setOpen(false);
   };
   useEffect(() => {
     dispatch(getJobs({ cur: 1, page: 6 }));
   }, []);
+
   const columns = [
     {
       title: "#",
@@ -65,6 +69,8 @@ function Job() {
             return <Tag color="blue">Doing</Tag>
           case 1: 
             return <Tag color="gold">Pending</Tag>
+          case 3:
+            return <Tag>Review</Tag>
           default:
             return <Tag color="magenta">?</Tag>
         }
@@ -92,6 +98,7 @@ function Job() {
       ),
     },
   ];
+
   const data = useMemo(() => {
     if (Boolean(jobs)) {
       return jobs.map((job, index) => ({
@@ -107,6 +114,7 @@ function Job() {
       }));
     }
   }, [jobs]);
+  
   return (
     <Spin spinning={isLoading}>
       <Table
@@ -115,6 +123,7 @@ function Job() {
         bordered
         size="middle"
         pagination={{
+          showSizeChanger: false,
           pageSize: 6,
           total: totalPage*6,
           onChange(page) {

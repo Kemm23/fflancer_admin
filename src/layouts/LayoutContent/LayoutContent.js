@@ -1,53 +1,51 @@
-import clsx from "clsx";
-import styles from "./LayoutContent.module.scss";
-import { Breadcrumb, Button, Divider, Input, Modal, Form } from "antd";
-import { HomeOutlined, PlusOutlined } from "@ant-design/icons";
-import { DefaultLayout } from "~/layouts";
-import Search from "antd/es/transfer/search";
-import { Footer } from "antd/es/layout/layout";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createAccount } from "~/store/reducers/adminSlice";
-
+import clsx from 'clsx'
+import styles from './LayoutContent.module.scss'
+import { Breadcrumb, Button, Divider, Input, Modal, Form } from 'antd'
+import { HomeOutlined, PlusOutlined } from '@ant-design/icons'
+import Search from 'antd/es/transfer/search'
+import { Footer } from 'antd/es/layout/layout'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { createAccount } from '~/store/reducers/adminSlice'
+import { Link } from 'react-router-dom'
 
 function LayoutContent({ children, ...props }) {
-  const onSearch = (value) => console.log(value);
-  const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [form] = Form.useForm();
+  const onSearch = (value) => console.log(value)
+  const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
+  const [form] = Form.useForm()
 
   const handleCancel = () => {
-    setOpen(false);
-    form.resetFields();
-  };
+    setOpen(false)
+    form.resetFields()
+  }
 
   const onFinish = async (values) => {
-    setConfirmLoading(true);
-    const { confirm, ...data } = values;
-    if (props.title === "Admin") {
-      Object.assign(data, { role: 0 });
-    } else if (props.title === "User") {
-      Object.assign(data, { role: 1 });
+    setConfirmLoading(true)
+    const { confirm, ...data } = values
+    if (props.title === 'Admin') {
+      Object.assign(data, { role: 0 })
+    } else if (props.title === 'User') {
+      Object.assign(data, { role: 1 })
     }
     await dispatch(createAccount(data))
-    setOpen(false);
-    setConfirmLoading(false);
-    console.log("Success:", data);
-    form.resetFields();
-  };
+    setOpen(false)
+    setConfirmLoading(false)
+    console.log('Success:', data)
+    form.resetFields()
+  }
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  
+    console.log('Failed:', errorInfo)
+  }
+
   return (
-    <DefaultLayout>
       <div className={clsx(styles.container)}>
         <div className={clsx(styles.header)}>
           <Breadcrumb>
-            <Breadcrumb.Item href="/dashboard">
-              <HomeOutlined /> Home
+            <Breadcrumb.Item>
+              <Link to="/dashboard"><HomeOutlined /> Home</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <strong> {props.title} management</strong>
@@ -55,18 +53,14 @@ function LayoutContent({ children, ...props }) {
           </Breadcrumb>
           <div>
             <h3> {props.title} management</h3>
-            {(props.title === "Admin" || props.title === "User") && (
+            {(props.title === 'Admin' || props.title === 'User') && (
               <>
-                <Button
-                  className={styles.btnCreate}
-                  type="primary"
-                  onClick={() => setOpen(true)}
-                >
+                <Button className={styles.btnCreate} type="primary" onClick={() => setOpen(true)}>
                   <PlusOutlined />
                   Create
                 </Button>
                 <Modal
-                  title={"Create  " + props.title}
+                  title={'Create  ' + props.title}
                   open={open}
                   okText="Create"
                   onOk={form.submit}
@@ -94,7 +88,7 @@ function LayoutContent({ children, ...props }) {
                       rules={[
                         {
                           required: true,
-                          message: "Please input your username!",
+                          message: 'Please input your username!',
                         },
                       ]}
                     >
@@ -106,12 +100,12 @@ function LayoutContent({ children, ...props }) {
                       label="E-mail"
                       rules={[
                         {
-                          type: "email",
-                          message: "The input is not valid E-mail!",
+                          type: 'email',
+                          message: 'The input is not valid E-mail!',
                         },
                         {
                           required: true,
-                          message: "Please input your E-mail!",
+                          message: 'Please input your E-mail!',
                         },
                       ]}
                     >
@@ -124,7 +118,7 @@ function LayoutContent({ children, ...props }) {
                       rules={[
                         {
                           required: true,
-                          message: "Please input your password!",
+                          message: 'Please input your password!',
                         },
                       ]}
                     >
@@ -134,19 +128,19 @@ function LayoutContent({ children, ...props }) {
                     <Form.Item
                       name="confirm"
                       label="Confirm Password"
-                      dependencies={["password"]}
+                      dependencies={['password']}
                       hasFeedback
                       rules={[
                         {
                           required: true,
-                          message: "Please confirm your password!",
+                          message: 'Please confirm your password!',
                         },
                         ({ getFieldValue }) => ({
                           validator(_, value) {
-                            if (!value || getFieldValue("password") === value) {
-                              return Promise.resolve();
+                            if (!value || getFieldValue('password') === value) {
+                              return Promise.resolve()
                             }
-                            return Promise.reject(new Error("The two passwords that you entered do not match!"));
+                            return Promise.reject(new Error('The two passwords that you entered do not match!'))
                           },
                         }),
                       ]}
@@ -171,10 +165,8 @@ function LayoutContent({ children, ...props }) {
             {children}
           </div>
         </div>
-        <Footer className={clsx(styles.footer)}>Copyright © 2022. All right reserved.</Footer>
       </div>
-    </DefaultLayout>
-  );
+  )
 }
 
-export default LayoutContent;
+export default LayoutContent

@@ -66,6 +66,7 @@ const adminSlice = createSlice({
     isLoading: false,
     admins: {},
     users: {},
+    listFreelancer: {},
     freelancers: {},
     jobs: {},
     transactions: {}
@@ -101,6 +102,12 @@ const adminSlice = createSlice({
             break;
           case 1:
             state.users = {
+              list: data.list,
+              totalPage: data.totalPage,
+            };
+            break;
+          case 2:
+            state.listFreelancer = {
               list: data.list,
               totalPage: data.totalPage,
             };

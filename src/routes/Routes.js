@@ -11,7 +11,7 @@ import { Job } from '~/pages/Job';
 import { Transaction } from '~/pages/Transaction';
 import { User } from '~/pages/User';
 import { Report } from '~/pages/Report';
-
+import { Financial } from '~/pages/Financial'
 
 // Public routes
 const privateRoutes = [
@@ -22,6 +22,7 @@ const privateRoutes = [
     { path: config.routes.job, component: Job, layout: WithoutSearch, title: "Job"},
     { path: config.routes.transaction, component: Transaction, layout: WithoutSearch, title: "Transaction"},
     { path: config.routes.report, component: Report},
+    { path: config.routes.financial, component: Financial, layout: WithoutSearch, title: "Financial"},
 ];
 
 const publicRoutes = []

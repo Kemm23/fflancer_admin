@@ -11,11 +11,13 @@ function Admin() {
   const totalPage = useSelector((state) => state.adminReducer.admins.totalPage);
   const isLoading = useSelector((state) => state.adminReducer.isLoading);
   const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState(false)
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [info, setInfo] = useState();
   const [form] = Form.useForm();
+
   const handleShow = (data) => {
     setInfo(data)
     setOpen(true)
@@ -149,10 +151,6 @@ function Admin() {
             labelCol={{
               span: 8,
             }}
-            // initialValues={{
-            //   ["username"]: info.fullname,
-            //   ["email"]: info.username,
-            // }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
