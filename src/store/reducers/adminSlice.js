@@ -60,6 +60,16 @@ export const getTransactions = createAsyncThunk("admin/getTransactions", async (
   return response.data;
 });
 
+export const getListJobByAccount = createAsyncThunk("admin/getListJobByAccount", async (id) => {
+  const response = await axios.get("https://ffreelancer.herokuapp.com/api/admin/job/getJobDoneByAccountID", {
+    params: {
+      accountId: id
+    },
+    headers: { Authorization: `Bearer ${storage.get()}` },
+  })
+  return response.data;
+})
+
 const adminSlice = createSlice({
   name: "admin",
   initialState: {
@@ -69,7 +79,8 @@ const adminSlice = createSlice({
     listFreelancer: {},
     freelancers: {},
     jobs: {},
-    transactions: {}
+    transactions: {},
+    listJobUser: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -146,6 +157,10 @@ const adminSlice = createSlice({
       .addCase(createAccount.fulfilled, (state, action) => {
         state.isLoading = false
         console.log("Create account success !")
+      })
+      .addCase(getListJobByAccount.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.listJobUser = action.payload.data
       })
       .addMatcher(
         (action) => {

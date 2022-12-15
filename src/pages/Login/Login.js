@@ -24,7 +24,6 @@ function Login() {
         duration: 3,
       });
       window.location.href = '/dashboard';
-      // navigate("/dashboard", {replace: true});
     }
   };
   return (

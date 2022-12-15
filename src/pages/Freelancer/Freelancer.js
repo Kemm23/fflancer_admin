@@ -1,9 +1,10 @@
-import clsx from "clsx";
-import { Button, Space, Table, Rate, Tag, Spin, Drawer, Row, Col, Modal } from "antd";
+import { Button, Space, Table, Rate, Tag, Spin, Drawer, Row, Col, Modal, List } from "antd";
 import { DeleteOutlined, EditOutlined, HomeOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { getFreelancers } from "~/store/reducers/adminSlice";
+import storage from "~/until/storage";
+import axios from "axios";
 
 function Freelancer() {
   let pageSize = 5
@@ -13,13 +14,28 @@ function Freelancer() {
 
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState(false)
+  const [listJobFreelancer, setListJobFreelancer] = useState()
   const [info, setInfo] = useState()
-  const handleShowDrawer = (data) => {
+  
+  const handleShowDrawer = async (data, id) => {
     setInfo(data)
     setOpen(true);
+    await axios.get("https://ffreelancer.herokuapp.com/api/admin/job/getJobDoneByFreelancerId", {
+      params: {
+        freelancerId: id
+      },
+      headers: { Authorization: `Bearer ${storage.get()}` },
+    })
+    .then((res) => {
+      setListJobFreelancer(res.data.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   };
   const onClose = () => {
     setOpen(false);
+    setListJobFreelancer()
   };
 
   const dispatch = useDispatch();
@@ -91,7 +107,7 @@ function Freelancer() {
       width: 80,
       render: (_, record) => (
           <Space size="middle">
-            <Button onClick={() => handleShowDrawer(record.freelancer)}>
+            <Button onClick={() => handleShowDrawer(record.freelancer, record.key)}>
               <EditOutlined />
             </Button>
             <Button onClick={() => setConfirm(true)}>
@@ -132,6 +148,7 @@ function Freelancer() {
           }
         }}
       />
+
       {Boolean(info) ? <Drawer
           title="Freelancer Information"
           placement="right"
@@ -170,7 +187,18 @@ function Freelancer() {
           <Row style={{margin: "20px 0"}}>
             <Col span={12}><strong>Language: </strong>{info.language.split(", ").map((item, index) => <Tag color="geekblue" key={index}>{item}</Tag>)}</Col>
           </Row>
+          <List
+              dataSource={listJobFreelancer}
+              renderItem={(item) => (
+              <List.Item style={{display: "block"}}>
+                <div><span style={{color: "#007bff", fontWeight: "bold"}}>{item.subject}</span>{"    "}<span>-{item.salary}$</span></div>
+                <Rate allowHalf value={item.rate} />
+                <div><p>{item.comment}</p></div>
+              </List.Item>
+              )}
+            />
         </Drawer> : <></>}
+
         <Modal title="Are you sure you want to delete user account?" open={confirm} onCancel={() => setConfirm(false)} onOk={() => setConfirm(false)}>
         <p>Deleted data cannot be recovered</p>
       </Modal>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
 import styles from './Dashboard.module.scss'
+import './Dashboard.css'
 import storage from '~/until/storage'
 import { getAccounts } from '~/store/reducers/adminSlice'
 import { Link } from 'react-router-dom'
@@ -81,37 +82,38 @@ function Dashboard() {
       <Space direction="vertical" style={{ width: '100%' }} size={30}>
         <Row gutter={30}>
           <Col flex="50%">
-            <Spin spinning={!Boolean(users) && !Boolean(freelancers)} style={{ height: '100%' }} />
-            <div className={styles.wrapperOverview}>
-              <div className={styles.titleItem}>User statistics</div>
-              <div className={styles.subTitleItem}>User statistics on the system</div>
-              <h4>{Boolean(totalUsers) ? totalUsers : ''}</h4>
-              <Progress
-                percent={(users?.length / totalUsers) * 100}
-                trailColor="#ffc107"
-                strokeLinecap="square"
-                strokeWidth={20}
-                showInfo={false}
-              />
-              <List>
-                <List.Item className={styles.listItem}>
-                  <div>
-                    <span className={styles.iconProgress1}></span> Normal User
-                  </div>
-                  <Space>{users?.length}Accounts</Space>
-                </List.Item>
-                <List.Item className={styles.listItem}>
-                  <div>
-                    <span className={styles.iconProgress2}></span>
-                    {'  '}Freelancer
-                  </div>
-                  <Space>{freelancers?.length}Accounts</Space>
-                </List.Item>
-              </List>
-            </div>
+              <Spin spinning={!Boolean(users) && !Boolean(freelancers)} style={{ height: '100%' }}>
+                <div className={styles.wrapperOverview}>
+                  <div className={styles.titleItem}>User statistics</div>
+                  <div className={styles.subTitleItem}>User statistics on the system</div>
+                  <h4>{Boolean(totalUsers) ? totalUsers : ''}</h4>
+                  <Progress
+                    percent={(users?.length / totalUsers) * 100}
+                    trailColor="#ffc107"
+                    strokeLinecap="square"
+                    strokeWidth={20}
+                    showInfo={false}
+                  />
+                  <List>
+                    <List.Item className={styles.listItem}>
+                      <div>
+                        <span className={styles.iconProgress1}></span> Normal User
+                      </div>
+                      <Space>{users?.length}Accounts</Space>
+                    </List.Item>
+                    <List.Item className={styles.listItem}>
+                      <div>
+                        <span className={styles.iconProgress2}></span>
+                        {'  '}Freelancer
+                      </div>
+                      <Space>{freelancers?.length}Accounts</Space>
+                    </List.Item>
+                  </List>
+                </div>
+              </Spin>
           </Col>
           <Col flex="50%">
-            <Spin spinning={!Boolean(users)} />
+            <Spin spinning={!Boolean(users)}>
             <div className={styles.wrapperOverview}>
               <div className={styles.titleItem}>
                 <div>User</div>
@@ -142,6 +144,7 @@ function Dashboard() {
                 )}
               />
             </div>
+            </Spin>
           </Col>
         </Row>
         <Row>
